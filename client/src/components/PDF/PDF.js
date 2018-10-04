@@ -13,16 +13,14 @@ class PDF extends Component {
         pdf.save("download.pdf");
       })
       .catch(err => {
-        console.log(err);
+        console.log("err", err);
       });
   };
 
   render() {
     return (
       <div>
-        <button onClick={this.pdfDocument}>
-          Export PDF
-        </button>
+        <button onClick={this.pdfDocument}>Export PDF</button>
       </div>
     );
   }

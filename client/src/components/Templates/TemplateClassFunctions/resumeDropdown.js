@@ -13,20 +13,6 @@ class ResumeDropdown extends Component {
     };
   }
 
-  // fillState = () => {
-  //   if (this.props.context.userInfo.resumes.length !== 0) {
-  //     const temp = this.props.context.userInfo.resumes.filter(resume => {
-  //       return this.props.context.userInfo.currentresume === resume._id;
-  //     });
-  //     if (temp.length > 0) return temp[0].content;
-  //     else return "Select a Resume";
-  //   } else return "Select a Resume";
-  // };
-
-  // componentDidMount = () => {
-  //   this.setState({ selected: this.fillState() });
-  // }
-
   handleEdit = editToggle => {
     if (editToggle === "toggle") this.setState({ edit: !this.state.toggled });
     else {
@@ -59,7 +45,6 @@ class ResumeDropdown extends Component {
             .then(response => {
               console.log("success");
               this.setState({ edit: !this.state.edit });
-              // this.props.context.actions.setElement(this.state.index, "resumes", response.data.Resume);
             })
             .catch(err => {
               console.log("err", err);
@@ -85,10 +70,7 @@ class ResumeDropdown extends Component {
     });
     // this updates template page index
     this.props.context.actions.setSingleElement("currentresume", data._id);
-    // console.log("handleClick UpdateResumeIndex(newIndex: " + index + ")")
     this.props.updateResumeIndex(index);
-    // this.props.updateResumeName(index);
-    // console.log("resumedropdown newcurrentres", data._id);
   };
 
   render() {
@@ -134,7 +116,6 @@ class ResumeDropdown extends Component {
                     event.target.blur();
                     event.preventDefault();
                     event.stopPropagation();
-                    //!fix
                     this.handleEdit();
                   }
                 }}
@@ -147,7 +128,14 @@ class ResumeDropdown extends Component {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <h4 style={{ marginRight: "1%" , fontWeight: "600", textShadow: "-1px -1px 1px white", color: "black"}}>
+              <h4
+                style={{
+                  marginRight: "1%",
+                  fontWeight: "600",
+                  textShadow: "-1px -1px 1px white",
+                  color: "black"
+                }}
+              >
                 {selectedResume}
               </h4>
               <i

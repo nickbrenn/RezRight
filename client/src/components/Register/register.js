@@ -66,7 +66,7 @@ class Register extends Component {
         this.setState({ usernameInvalid: true });
       })
       .catch(err => {
-        console.log(err);
+        console.log("err", err);
       });
     const emailPromise = axios
       .get(`${urls[urls.basePath]}/users/emailcheck/${this.state.email}`)
@@ -74,7 +74,7 @@ class Register extends Component {
         this.setState({ emailInvalid: true });
       })
       .catch(err => {
-        console.log(err);
+        console.log("err", err);
       });
     if (!this.validateEmail(this.state.email)) {
       this.setState({ emailInvalid: true });
@@ -115,7 +115,11 @@ class Register extends Component {
         path: window.location.origin + "/confirmationpage"
       })
       .then(response => {
-        this.setState({ submitted: true, submittedError: false, validateMessage: response.data });
+        this.setState({
+          submitted: true,
+          submittedError: false,
+          validateMessage: response.data
+        });
       })
       .catch(err => {
         console.log("err", err);
@@ -242,7 +246,7 @@ class Register extends Component {
               
               Please click the following link to register
               your account: */}
-               Please click the link below to activate your account
+              Please click the link below to activate your account
             </p>
             <a
               style={{ marginTop: "10px", marginBottom: "10px" }}

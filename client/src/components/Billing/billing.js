@@ -21,10 +21,13 @@ class Billing extends Component {
   }
 
   componentDidUpdate = () => {
-    if(this.props.context.userInfo.auth === true && this.props.context.userInfo.membership !== this.state.complete){
+    if (
+      this.props.context.userInfo.auth === true &&
+      this.props.context.userInfo.membership !== this.state.complete
+    ) {
       this.setState({ complete: this.props.context.userInfo.membership });
     }
-  }
+  };
 
   tokenCreator = async () => {
     let { token } = await this.props.stripe.createToken({
@@ -44,11 +47,11 @@ class Billing extends Component {
     this.tokenCreator()
       .then(token => {
         axios
-          .post(`${urls[urls.basePath]}/pay/monthly`, token,
-            {
-              headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+          .post(`${urls[urls.basePath]}/pay/monthly`, token, {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
             }
-          )
+          })
           .then(res => {
             this.setState({
               complete: true,
@@ -58,8 +61,11 @@ class Billing extends Component {
               unsub_err: false
             });
             this.props.context.actions.setSingleElement("membership", true);
-            if(res.data.resumes.length > 1){
-              this.props.context.actions.setSingleElement("resumes", res.data.resumes);
+            if (res.data.resumes.length > 1) {
+              this.props.context.actions.setSingleElement(
+                "resumes",
+                res.data.resumes
+              );
               this.props.context.actions.expandResumeIDs();
             }
           })
@@ -74,7 +80,7 @@ class Billing extends Component {
           });
       })
       .catch(err => {
-        console.log(err);
+        console.log("err", err);
       });
   };
 
@@ -89,11 +95,11 @@ class Billing extends Component {
     this.tokenCreator()
       .then(token => {
         axios
-          .post(`${urls[urls.basePath]}/pay/yearly`, token,
-            {
-              headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+          .post(`${urls[urls.basePath]}/pay/yearly`, token, {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
             }
-          )
+          })
           .then(res => {
             this.setState({
               complete: true,
@@ -102,8 +108,11 @@ class Billing extends Component {
               gone: false
             });
             this.props.context.actions.setSingleElement("membership", true);
-            if(res.data.resumes.length > 1){
-              this.props.context.actions.setSingleElement("resumes", res.data.resumes);
+            if (res.data.resumes.length > 1) {
+              this.props.context.actions.setSingleElement(
+                "resumes",
+                res.data.resumes
+              );
               this.props.context.actions.expandResumeIDs();
             }
           })
@@ -118,7 +127,7 @@ class Billing extends Component {
           });
       })
       .catch(err => {
-        console.log(err);
+        console.log("err", err);
       });
   };
 
@@ -131,8 +140,10 @@ class Billing extends Component {
       unsub_err: false
     });
     axios
-      .post(`${urls[urls.basePath]}/pay/unsubscribe`, {
-        email: this.props.context.userInfo.email
+      .post(
+        `${urls[urls.basePath]}/pay/unsubscribe`,
+        {
+          email: this.props.context.userInfo.email
         },
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") }
@@ -147,7 +158,9 @@ class Billing extends Component {
           unsub_err: false
         });
         this.props.context.actions.setSingleElement("membership", false);
-        this.props.context.actions.setSingleElement("resumes", [this.props.context.userInfo.resumes[0]]);
+        this.props.context.actions.setSingleElement("resumes", [
+          this.props.context.userInfo.resumes[0]
+        ]);
         this.props.context.actions.setCurrentResume();
       })
       .catch(err => {
@@ -169,73 +182,75 @@ class Billing extends Component {
           <Sidebar context={this.props.context} />
           <div className="billing title-div col">
             <div className="section-title">
-            <div className="link-hide" style={{float: "left", padding: "0"}}>
-              <h4>BILLING</h4>
-            </div>
- 
-            <div style={{width: "100%"}}>
-              <p
-                style={{
-                  display: "inline-block",
-                  fontSize: "0.7rem",
-                  paddingLeft: ".6rem",
-                  borderTop: "1px solid black",
-                  width: "100%"
-                }}
+              <div
+                className="link-hide"
+                style={{ float: "left", padding: "0" }}
               >
-                Become a Member:
-              </p>
-            </div>
-            <div>
-              {this.state.loading ? <Loading /> : null}
-              {this.state.sub_err ? (
-                <p>
-                  You are unable to complete subscribe if you are already a
-                  member or your payment is invalid!
-                </p>
-              ) : null}
-              {this.state.unsub_err ? (
-                <p>You do not have an active subscription!</p>
-              ) : null}
- 
+                <h4>BILLING</h4>
+              </div>
 
-            <div className="stripe">
-              <div className="stripe-form">
-                {this.state.complete ? (
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <h2>
-                      Thank You For Becoming A Member!
-                    </h2>
-                  </div>
-                ) : (
-                  <div className="stripe-pay">
-                    <div className="card-element">
-                      <CheckoutForm />
-                    </div>
-                    <div className="btn-group">
-                      <button className="bill-btn" onClick={this.monthly}>
-                        Monthly Subscriptions - $0.99
-                      </button>
-                      <button className="bill-btn" onClick={this.yearly}>
-                        Yearly Subscriptions - $9.99
-                      </button>
-                    </div>
-                  </div>
-                )}
-                {this.state.gone ? (
-                  <p style={{ textAlign: "center" }}>
-                    Thank you for your business. We hope to work with you again
-                    soon!
+              <div style={{ width: "100%" }}>
+                <p
+                  style={{
+                    display: "inline-block",
+                    fontSize: "0.7rem",
+                    paddingLeft: ".6rem",
+                    borderTop: "1px solid black",
+                    width: "100%"
+                  }}
+                >
+                  Become a Member:
+                </p>
+              </div>
+              <div>
+                {this.state.loading ? <Loading /> : null}
+                {this.state.sub_err ? (
+                  <p>
+                    You are unable to complete subscribe if you are already a
+                    member or your payment is invalid!
                   </p>
-                ) : (
-                  <button
-                    className="bill-btn unsubscribe"
-                    onClick={this.unsubscribe}
-                  >
-                    Unsubscribe
-                  </button>
-                )}
-                </div>
+                ) : null}
+                {this.state.unsub_err ? (
+                  <p>You do not have an active subscription!</p>
+                ) : null}
+
+                <div className="stripe">
+                  <div className="stripe-form">
+                    {this.state.complete ? (
+                      <div
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
+                        <h2>Thank You For Becoming A Member!</h2>
+                      </div>
+                    ) : (
+                      <div className="stripe-pay">
+                        <div className="card-element">
+                          <CheckoutForm />
+                        </div>
+                        <div className="btn-group">
+                          <button className="bill-btn" onClick={this.monthly}>
+                            Monthly Subscriptions - $0.99
+                          </button>
+                          <button className="bill-btn" onClick={this.yearly}>
+                            Yearly Subscriptions - $9.99
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                    {this.state.gone ? (
+                      <p style={{ textAlign: "center" }}>
+                        Thank you for your business. We hope to work with you
+                        again soon!
+                      </p>
+                    ) : (
+                      <button
+                        className="bill-btn unsubscribe"
+                        onClick={this.unsubscribe}
+                      >
+                        Unsubscribe
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

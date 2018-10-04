@@ -127,28 +127,18 @@ export class PersonalInfo extends Component {
 
   checkInputValidity = () => {
     this.setState({
-      // usernameInvalid: false,
       emailInvalid: false,
       passwordInvalid: false,
       changesSaved: null
     });
     if (this.state.email !== this.props.context.userInfo.email) {
-      // const usernamePromise = axios
-      //   .get(`${urls[urls.basePath]}/users/usernamecheck/${this.state.username}`)
-      //   .then(response => {
-      //     console.log(response);
-      //     this.setState({ usernameInvalid: "error" });
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
       const emailPromise = axios
         .get(`${urls[urls.basePath]}/users/emailcheck/${this.state.email}`)
         .then(response => {
           this.setState({ emailInvalid: true });
         })
         .catch(err => {
-          console.log(err);
+          console.log("err", err);
         });
       if (!this.validateEmail(this.state.email)) {
         this.setState({ emailInvalid: true });
@@ -258,7 +248,9 @@ export class PersonalInfo extends Component {
                   value={this.state.phonenumber}
                   onChange={this.handleChange}
                 />
-                <p style={{ fontStyle : "italic", color: "grey" }}>Example: 123-456-7890</p>
+                <p style={{ fontStyle: "italic", color: "grey" }}>
+                  Example: 123-456-7890
+                </p>
               </FormGroup>
               <FormGroup>
                 <Label>Location</Label>
@@ -280,12 +272,14 @@ export class PersonalInfo extends Component {
                   onChange={this.handleChange}
                 />
                 {this.props.context.userInfo.name.firstname ? (
-                  <p style={{ fontStyle : "italic", color: "grey" }}>
+                  <p style={{ fontStyle: "italic", color: "grey" }}>
                     Example: linkedin.com/in/
                     {this.props.context.userInfo.name.firstname.toLowerCase()}/
                   </p>
                 ) : (
-                  <p style={{ fontStyle : "italic", color: "grey" }}>Example: linkedin.com/in/test/</p>
+                  <p style={{ fontStyle: "italic", color: "grey" }}>
+                    Example: linkedin.com/in/test/
+                  </p>
                 )}
               </FormGroup>
               <FormGroup>
@@ -298,12 +292,14 @@ export class PersonalInfo extends Component {
                   onChange={this.handleChange}
                 />
                 {this.props.context.userInfo.name.firstname ? (
-                  <p style={{ fontStyle : "italic", color: "grey" }}>
+                  <p style={{ fontStyle: "italic", color: "grey" }}>
                     Example: github.com/
                     {this.props.context.userInfo.name.firstname.toLowerCase()}
                   </p>
                 ) : (
-                  <p style={{ fontStyle : "italic", color: "grey" }}>Example: github.com/test</p>
+                  <p style={{ fontStyle: "italic", color: "grey" }}>
+                    Example: github.com/test
+                  </p>
                 )}
               </FormGroup>
               <FormGroup>
@@ -459,10 +455,13 @@ class Settings extends Component {
           <Sidebar context={this.props.context} />
           <div className="settings title-div col">
             <div className="section-title">
-              <div className="link-hide" style={{float: "left", padding: "0"}}>
+              <div
+                className="link-hide"
+                style={{ float: "left", padding: "0" }}
+              >
                 <h4>SETTINGS</h4>
-              </div>              
-              <div style={{width: "100%"}}>
+              </div>
+              <div style={{ width: "100%" }}>
                 <p
                   style={{
                     display: "inline-block",
