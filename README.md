@@ -1,6 +1,6 @@
 # CS9-ResumeMaker
 
-Front End - https://labs-resume-maker.firebaseapp.com/
+Front End - https://rezright.netlify.com
 
 Back End - https://labs-resume-maker.herokuapp.com/
 
