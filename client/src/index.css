@@ -68,7 +68,7 @@ textarea {
   padding-right: 2rem;
 }
 .section-title {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   margin: 0.8rem;
   padding: 1rem;
@@ -78,7 +78,7 @@ textarea {
   padding: 0;
 }
 .templates.section-title {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
 }
 .billing.title-div.col {
   background-image: url(images/abstract.jpg);
@@ -352,6 +352,13 @@ button.close:focus {
 .card-body.card-text.card {
   text-decoration-color: black;
 }
+.experience-containment-div,
+.summary-containment-div,
+.titles-containment-div,
+.education-containment-div,
+.skills-containment-div {
+  padding-bottom: 2rem;
+}
 .landing-button {
   padding: 1px;
 }
@@ -494,7 +501,6 @@ img {
   justify-content: center;
 }
 .Settings.container {
-  margin-left: 0;
   margin-top: 1rem;
 }
 .sidebar {
@@ -578,7 +584,7 @@ img {
   padding: 0.5rem 0 0 0;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
   width: 95%;
-  background-image: url('images/blank-paper.jpg');
+  background-image: url("images/blank-paper.jpg");
   background-size: cover;
 }
 .page-div.col {
@@ -663,7 +669,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 .contact-section .contactSection {
   display: flex;
@@ -683,7 +689,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 .title-section .titleHolder {
   min-width: 100px;
@@ -701,7 +707,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 .summary-section .summaryHolder {
   min-width: 100px;
@@ -719,7 +725,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 .skills-section .skillsHolder {
   min-width: 100px;
@@ -742,7 +748,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 .experience-section .experienceHolder {
   min-width: 100px;
@@ -764,7 +770,7 @@ img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 .education-section .educationHolder {
   min-height: 118px;
