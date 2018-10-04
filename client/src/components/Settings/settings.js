@@ -156,17 +156,12 @@ export class PersonalInfo extends Component {
           this.handleSubmit();
         } else {
           this.setState({ changesSaved: false });
-          // this.componentDidMount();
         }
       });
     } else this.handleSubmit();
   };
 
   handleSubmit = e => {
-    // e.preventDefault();
-    // this.setState({ errors: [] });
-    // const errors = [];
-    //TODO: render any conditions before axios call
     axios
       .put(
         `${urls[urls.basePath]}/users/info/` + this.props.context.userInfo.id,

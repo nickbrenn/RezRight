@@ -52,7 +52,6 @@ class AuthProvider extends Component {
   };
 
   setLogin = (dataFromUser, expandResumes) => {
-    console.log("setLogin called", dataFromUser);
     const userData = dataFromUser.user;
     this.setState({
       auth: true,
@@ -83,31 +82,20 @@ class AuthProvider extends Component {
     });
     // Every time setLogin is called due to changing user data in database,
     // setLogin is called which then updates the resumes.
-    if(expandResumes === true){
+    if (expandResumes === true) {
       this.expandResumeIDs();
     } else if (dataFromUser.resumes) {
-      // const links = {
-      //   github: false,
-      //   linkedin: false,
-      //   portfolio: false
-      // };
-      // dataFromUser.resumes.forEach(resume => {
-      //   resume.links = links;
-      // });
       this.setResume(dataFromUser.resumes);
     }
   };
 
-  setCurrentResume = (resume) => {
-    console.log("setCurrentResume called with", resume)
-    if(this.state.resumes.length > 0){
-      const newCurrentResume = resume ? resume: this.state.resumes[0]._id;
-      this.setState({ currentresume: newCurrentResume })
+  setCurrentResume = resume => {
+    if (this.state.resumes.length > 0) {
+      const newCurrentResume = resume ? resume : this.state.resumes[0]._id;
+      this.setState({ currentresume: newCurrentResume });
       axios
         .put(
-          `${urls[urls.basePath]}/users/info/${
-            this.state.id
-          }`,
+          `${urls[urls.basePath]}/users/info/${this.state.id}`,
           { currentresume: newCurrentResume },
           {
             headers: {
@@ -115,34 +103,23 @@ class AuthProvider extends Component {
             }
           }
         )
-        .then(response => {
-          console.log("setCurrentResume response", response);
-        })
+        .then(response => {})
         .catch(err => {
           console.log("err", err);
         });
     }
-  }
+  };
 
   setResume = resumeData => {
-    console.log("setResume called with:", resumeData);
     if (this.state.auth !== true) {
       return;
-    } else if (!(this.state.resumes.length > 0) && resumeData && resumeData.length > 0) {
+    } else if (
+      !(this.state.resumes.length > 0) &&
+      resumeData &&
+      resumeData.length > 0
+    ) {
       this.setState({ resumes: resumeData });
-    } 
-    // else if (
-    //   !(resumeData.length > 0 || resumeData[0] === null) &&
-    //   this.state.auth
-    // ) {
-    //   this.createResume(true);
-    // // } else if (
-    // //   this.state.resumes.length &&
-    // //   resumeData.length === this.state.resumes.length
-    // // ) {
-    // //   this.expandResumeIDs();
-    // } 
-    else {
+    } else {
       return;
     }
   };
@@ -181,7 +158,6 @@ class AuthProvider extends Component {
       tempState.push(tempObj);
     } else tempState.push(tempObj);
     tempObj["resumes"] = tempState.map(resume => resume._id);
-    // !fix below setstate maybe
     this.setState({ resumes: tempState });
 
     axios
@@ -197,12 +173,6 @@ class AuthProvider extends Component {
           resumes: tempState,
           currentresume: response.data.Resume._id
         });
-        // if(this.state.resumes.length <= 1){
-        //   console.log("setResume replaced index 0 resume", response.data);
-        //   this.setState({ resumes: response.data.resumes, currentresume: response.data.Resume._id });
-        // } else {
-        //   this.setState({ resumes: tempState, currentresume: response.data.Resume._id });
-        // }
       })
       .catch(err => {
         console.log("err", err);
@@ -210,7 +180,6 @@ class AuthProvider extends Component {
   };
 
   expandResumeIDs = () => {
-    console.log("expandResumeIDs called");
     function findWithAttr(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
@@ -220,12 +189,9 @@ class AuthProvider extends Component {
       return -1;
     }
 
-    // const tempResumes = [];
     const tempResumes = this.state.resumes;
 
     const expandSection = (section, resumeSection, index) => {
-      // no .sections portion
-
       let tempObj;
       if (!resumeSection) {
         tempObj = tempResumes[index][section];
@@ -233,21 +199,23 @@ class AuthProvider extends Component {
           const current = tempResumes[index][section].filter(
             resumeItem => resumeItem._id === item._id
           );
-          if(current.length === 0){
+          if (current.length === 0) {
             tempObj.push({
               _id: item._id,
               value: false
-            })
+            });
           }
         } // All items in context now have a resume counterpart
         let loopVar = tempResumes[index][section].length;
         for (let i = 0; loopVar > i; i++) {
           if (
-            !(findWithAttr(
-              this.state[section],
-              "_id",
-              tempResumes[index][section][i]._id
-            ) > -1)
+            !(
+              findWithAttr(
+                this.state[section],
+                "_id",
+                tempResumes[index][section][i]._id
+              ) > -1
+            )
           ) {
             tempObj.splice(i, 1);
             loopVar--;
@@ -261,21 +229,23 @@ class AuthProvider extends Component {
           const current = tempResumes[index].sections[section].filter(
             resumeItem => resumeItem._id === item._id
           );
-          if(current.length === 0){
+          if (current.length === 0) {
             tempObj.push({
               _id: item._id,
               value: false
-            })
+            });
           }
         } // All items in context now have a resume counterpart
         let loopVar = tempResumes[index].sections[section].length;
         for (let i = 0; loopVar > i; i++) {
           if (
-            !(findWithAttr(
-              this.state[section],
-              "_id",
-              tempResumes[index].sections[section][i]._id
-            ) > -1)
+            !(
+              findWithAttr(
+                this.state[section],
+                "_id",
+                tempResumes[index].sections[section][i]._id
+              ) > -1
+            )
           ) {
             tempObj.splice(i, 1);
             loopVar--;
@@ -283,18 +253,11 @@ class AuthProvider extends Component {
           }
         } // All items in resume that are not in context were deleted from resume
       }
-      console.log("Expand res return temp object", tempObj);
       return tempObj;
-      // console.log("WE are pushing (index) (tempObj)", section, index, resumeSection, tempObj)
-      // tempResumes[index][section] = tempObj;
-      // console.log("tempRes", tempResumes[index][section], tempObj);
-      // this.setState({ ["resumes"[index][section]]: tempObj });
-      // tempResumes.push(tempObj);
     };
 
     // Using promises means the state is only set a single name, rather than for each
     // subattribute changed or once for each resume that is updated.
-    // let resumePromises = [];
 
     // SET TRUE IF .SECTION IS IN FRONT OF IT SO TITLE IS FALSE DUDE
     this.state.resumes.forEach((item, index) => {
@@ -310,8 +273,6 @@ class AuthProvider extends Component {
       tempResumes[index].sections.skills = newSkills;
     });
 
-    console.log("now we set state to tempresumes, here are old ones", this.state.resumes);
-    console.log("now we set state to tempresumes", tempResumes);
     this.setState({ resumes: tempResumes });
 
     for (let i = 0; i < this.state.resumes.length; i++) {
@@ -325,26 +286,14 @@ class AuthProvider extends Component {
             }
           }
         )
-        .then(response => {
-          // return response.data.resume;
-        })
+        .then(response => {})
         .catch(err => {
           console.log("err", err);
-          // return err;
         });
-      // resumePromises.push(resumePromise);
     }
-
-    // console.log("OUR PROMISES", resumePromises);
-    // Once every request is finished state updates once.
-    // Promise.all(resumePromises).then(updatedResumes => {
-    //   // console.log("promise me ned", updatedResumes);
-    //   this.setState({ resumes: updatedResumes})
-    // })
   };
 
   setResumeItemState = (index, name, id) => {
-    console.log("setResumeItemState:", index, name, id);
     const tempState = this.state;
     if (name === "linkedin" || name === "github" || name === "portfolio") {
       tempState.resumes[index].links[name] = !tempState.resumes[index].links[
@@ -361,7 +310,6 @@ class AuthProvider extends Component {
   }; //Checkboxes
 
   setResumeItemDropdown = (index, name, id) => {
-    console.log("setResumeItemDropdown:", index, name, id);
     const tempState = this.state;
     if (name === "title") {
       tempState.resumes[index][name].forEach(field => {
@@ -407,7 +355,6 @@ class AuthProvider extends Component {
 
   render() {
     const userInfo = this.state;
-    console.log("USERINFO on authprovider:", userInfo);
     return (
       <AuthContext.Provider
         value={{

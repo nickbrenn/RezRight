@@ -36,8 +36,6 @@ class Resumes extends Component {
   };
 
   updateResumeName = newIndex => {
-    console.log("NULL ME BABY", newIndex);
-    // console.log("updateResumeName: newIndex = ", newIndex)
     if (this.props.context.userInfo.resumes.length > 0) {
       if (newIndex >= 0) {
         this.setState({
@@ -55,10 +53,7 @@ class Resumes extends Component {
   };
 
   updateResumeIndex = newIndex => {
-    // console.log("IS THIS RUN UPDATE", newIndex)
     if (newIndex >= 0) {
-      // console.log("NEWINDEX", newIndex)
-      // console.log("updateResumeIndex, newIndex", newIndex)
       this.setState({ index: newIndex });
     } else {
       let index = this.findWithAttr(
@@ -132,9 +127,6 @@ class Resumes extends Component {
         })
       }
     };
-    // tempObj["resumes"] = this.props.context.userInfo.resumes.map(
-    //   resume => resume._id
-    // );
     axios
       .post(`${urls[urls.basePath]}/resume/`, tempObj, {
         headers: {
@@ -155,14 +147,11 @@ class Resumes extends Component {
       event.preventDefault();
     }
     const tempObj = this.props.context.userInfo.resumes[this.state.index];
-    if(useProps === true){
+    if (useProps === true) {
       tempObj.name = this.props.resumeName;
     } else {
       tempObj.name = this.state.resumeName;
     }
-    // tempObj["resumes"] = this.props.context.userInfo.resumes.map(
-    //   resume => resume._id
-    // );
     if (tempObj._id) {
       axios
         .put(
@@ -189,10 +178,9 @@ class Resumes extends Component {
               }
             )
             .then(response => {
-              if(useProps !== true){
+              if (useProps !== true) {
                 this.setState({ success: true });
               }
-              // this.props.context.actions.setElement(this.state.index, "resumes", response.data.Resume);
             })
             .catch(err => {
               console.log("err", err);
@@ -210,7 +198,6 @@ class Resumes extends Component {
           }
         })
         .then(response => {
-          // this.setState({ success: true });
           this.props.context.actions.pushResumes(response.data.Resume);
         })
         .catch(err => {
@@ -224,7 +211,6 @@ class Resumes extends Component {
       event.preventDefault();
     }
     const tempObj = this.props.context.userInfo.resumes[this.state.index];
-    console.log("TEMP OBJ", tempObj);
     if (tempObj._id) {
       axios
         .delete(`${urls[urls.basePath]}/resume/delete/` + tempObj._id, {
@@ -233,17 +219,10 @@ class Resumes extends Component {
           }
         })
         .then(response => {
-          console.log("DELETE RESPONSE");
           this.props.context.actions.removeElement(this.state.index, "resumes");
-          // this.props.context.actions.setSingleElement("currentresume", )
           if (this.state.index > 0) {
-            // this.props.context.actions.setCurrentResume(this.state.index - 1);
             this.updateResumeIndex(this.state.index - 1);
           } else this.updateResumeIndex(this.state.index);
-          // else if(this.props.context.userInfo.resumes[this.state.index + 1]){
-          //   // this.props.context.actions.setCurrentResume(this.state.index + 1);
-          //   this.updateResumeIndex(this.state.index + 1);
-          // }
         })
         .catch(err => {
           console.log("err", err);
@@ -270,23 +249,11 @@ class Resumes extends Component {
     if (this.props.context.userInfo.resumes[0]) {
       if (this.state.resumeName === null || this.state.index === null) {
         this.updateResumeIndex();
-        // } else if(this.state.index !== null && this.state.resumeName != this.props.context.userInfo.resumes[this.state.index].name){
-        //   this.updateResumeName(this.state.index);
       }
     }
   };
 
   render() {
-    console.log(
-      "resumes render props resumes",
-      this.props.context.userInfo.resumes
-    );
-    console.log("resumes render state index", this.state.index);
-    console.log(
-      "resumes render currentres props",
-      this.props.context.userInfo.currentresume
-    );
-
     if (!this.props.context.userInfo.auth && !localStorage.getItem("token")) {
       return <Redirect to="/login" />;
     }
@@ -301,7 +268,6 @@ class Resumes extends Component {
       this.props.context.userInfo.currentresume === null ||
       !resumes[this.state.index]
     ) {
-      // {resumes.length ? this.handleCreate() : null}
       return (
         <div>
           <div style={{ display: "none" }}>
@@ -323,13 +289,16 @@ class Resumes extends Component {
             <div className="templates section-title">
               {this.props.context.userInfo.name.firstname ? (
                 <React.Fragment>
-                  <div className="link-hide" style={{float: "left", padding: "0"}}>
+                  <div
+                    className="link-hide"
+                    style={{ float: "left", padding: "0" }}
+                  >
                     <h4>
                       Welcome to your Dashboard,{" "}
                       {this.props.context.userInfo.name.firstname}!
                     </h4>
                   </div>
-                  <div style = {{width: "100%"}}>
+                  <div style={{ width: "100%" }}>
                     <p
                       style={{
                         display: "inline-block",
@@ -343,20 +312,23 @@ class Resumes extends Component {
                       {" "}
                       Click each tab on the left to enter your information and
                       populate each section on the resume form below: JOB TITLE,
-                      SUMMARY, SKILLS, EXPERIENCE, & EDUCATION. Next, scroll down
-                      this page to check the information you would like displayed
-                      on your final resume. Once completed, SAVE your changes and
-                      go to TEMPLATES to choose your layout. You can also CREATE
-                      multiple RESUMES with a subscription.
+                      SUMMARY, SKILLS, EXPERIENCE, & EDUCATION. Next, scroll
+                      down this page to check the information you would like
+                      displayed on your final resume. Once completed, SAVE your
+                      changes and go to TEMPLATES to choose your layout. You can
+                      also CREATE multiple RESUMES with a subscription.
                     </p>
                   </div>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
-                  <div className="link-hide" style={{float: "left", padding: "0"}}>
+                  <div
+                    className="link-hide"
+                    style={{ float: "left", padding: "0" }}
+                  >
                     <h4>Welcome! </h4>
                   </div>
-                  <div style={{width: "100%"}}>
+                  <div style={{ width: "100%" }}>
                     <p
                       style={{
                         display: "inline-block",
@@ -425,7 +397,7 @@ class Resumes extends Component {
             <Container className="resumePage">
               <Container className="contact-section">
                 <Container className="contact-holder">
-                <h6 style={{ fontWeight: "bold" }}>Contact Details:</h6>
+                  <h6 style={{ fontWeight: "bold" }}>Contact Details:</h6>
                 </Container>
                 <Container className="contactSection">
                   {this.props.context.userInfo.name.firstname &&
@@ -519,7 +491,7 @@ class Resumes extends Component {
               </Container>
               <Container className="title-section">
                 <Container className="titleHolder">
-                <h6 style={{ fontWeight: "bold" }}>Titles:</h6>
+                  <h6 style={{ fontWeight: "bold" }}>Titles:</h6>
                 </Container>
                 <Container className="titleSection">
                   <TitleDropdown
@@ -538,7 +510,7 @@ class Resumes extends Component {
               </Container>
               <Container className="summary-section">
                 <div className="summaryHolder">
-                <h6 style={{ fontWeight: "bold" }}>Summary:</h6>
+                  <h6 style={{ fontWeight: "bold" }}>Summary:</h6>
                 </div>
                 <Container className="summarySection">
                   <SummaryDropdown
@@ -557,7 +529,7 @@ class Resumes extends Component {
               </Container>
               <Container className="skills-section">
                 <div className="skillsHolder">
-                <h6 style={{ fontWeight: "bold" }}>Skills:</h6>
+                  <h6 style={{ fontWeight: "bold" }}>Skills:</h6>
                 </div>
                 <Container
                   className="skillsSection"
@@ -566,22 +538,21 @@ class Resumes extends Component {
                   {userInfo.skills.map((content, index) => {
                     return (
                       <div key={content._id}>
-                          {" "}
-                          <CheckBox
-                            context={this.props.context}
-                            id={content._id}
-                            name="skills"
-                            value={
-                              resumes[this.state.index].sections.skills[index]
-                                ? resumes[this.state.index].sections.skills[
-                                    index
-                                  ].value
-                                : null
-                            }
-                            index={this.state.index}
-                          />
-                          <b>{" " + content.groupname}</b>
-                          <p>{content.content}</p>
+                        {" "}
+                        <CheckBox
+                          context={this.props.context}
+                          id={content._id}
+                          name="skills"
+                          value={
+                            resumes[this.state.index].sections.skills[index]
+                              ? resumes[this.state.index].sections.skills[index]
+                                  .value
+                              : null
+                          }
+                          index={this.state.index}
+                        />
+                        <b>{" " + content.groupname}</b>
+                        <p>{content.content}</p>
                       </div>
                     );
                   })}
@@ -663,7 +634,10 @@ class Resumes extends Component {
                             }
                             index={this.state.index}
                           />
-                          {" " + content.degree}{content.fieldofstudy !== "" ? " in " + content.fieldofstudy : null}
+                          {" " + content.degree}
+                          {content.fieldofstudy !== ""
+                            ? " in " + content.fieldofstudy
+                            : null}
                         </h6>
                         <p>{content.location}</p>
                         <p>

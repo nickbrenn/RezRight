@@ -62,9 +62,6 @@ export class ResumeOne extends Component {
     const education = this.props.context.userInfo.education;
     const experience = this.props.context.userInfo.experience;
     const resumes = this.props.context.userInfo.resumes;
-    // const summaryLength = userInfo.summary.filter((item, index) => {
-    //   return resumes[this.state.index].sections.summary[index].value;
-    // });
     const summaryLength = userInfo.summary.filter((item, index) => {
       return resumes[this.state.index].sections.summary[index].value;
     });
@@ -217,7 +214,10 @@ export class ResumeOne extends Component {
                       .value ? (
                       <div key={content._id}>
                         <h5>
-                          {content.degree}{content.fieldofstudy !== "" ? " in " + content.fieldofstudy : null}
+                          {content.degree}
+                          {content.fieldofstudy !== ""
+                            ? " in " + content.fieldofstudy
+                            : null}
                         </h5>
                         <p>{content.location}</p>
                         <p>

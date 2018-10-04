@@ -132,7 +132,6 @@ class Register extends Component {
   };
 
   render() {
-    console.log("state", this.state);
     if (this.state.submittedError === true) {
       return (
         <div className="Login">
@@ -182,14 +181,6 @@ class Register extends Component {
               />
               <FormFeedback>Please enter an unused valid email.</FormFeedback>
             </FormGroup>
-            {/* <h6>Password</h6>
-            <div>Must be longer than 6 characters </div>
-            <div>Must have at least 1 uppercase</div>
-            <div>Must have at least 1 lowercase</div>
-            <div>Must have at least 1 special character</div>
-            <div style={{ marginBottom: "20px" }}>
-              Must have at least 1 digit
-            </div> */}
             <FormGroup>
               <h6>Password</h6>
               <Input

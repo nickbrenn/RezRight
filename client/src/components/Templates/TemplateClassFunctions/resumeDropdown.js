@@ -43,7 +43,6 @@ class ResumeDropdown extends Component {
               }
             )
             .then(response => {
-              console.log("success");
               this.setState({ edit: !this.state.edit });
             })
             .catch(err => {
@@ -77,10 +76,6 @@ class ResumeDropdown extends Component {
     const { toggled } = this.state;
     let selectedResume = null;
     const list = this.props.context.userInfo.resumes.map((data, index) => {
-      console.log(
-        "RENDERED so go thorugh",
-        this.props.context.userInfo.resumes[index].name
-      );
       if (data._id === this.props.context.userInfo.currentresume) {
         selectedResume =
           data.name === "Untitled" ? "Untitled " + (index + 1) : data.name;

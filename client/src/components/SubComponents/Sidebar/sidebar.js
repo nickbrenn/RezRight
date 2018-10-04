@@ -26,15 +26,6 @@ class Sidebar extends Component {
         })
         .then(response => {
           this.props.context.actions.setLogin(response.data);
-          // this.props.context.actions.expandResumeIDs();
-          // if(response.data.resumes.length >= 1){
-          //   for(let i = 0; i < response.data.resumes.length; i++){
-          //     this.props.context.actions.expandResumeIDs(response.data.resumes[i]._id)
-          //   }
-          // }
-          // if(response.data.user.currentresume._id){
-          //   this.props.context.actions.expandResumeIDs(response.data.user.currentresume._id);
-          // }
         })
         .catch(err => {
           this.props.context.actions.setLogout();
@@ -78,7 +69,11 @@ class Sidebar extends Component {
             })}
           >
             {" "}
-            <div className="fa fa-check-square sm" style={{ color: "white" }} /> DASHBOARD
+            <div
+              className="fa fa-check-square sm"
+              style={{ color: "white" }}
+            />{" "}
+            DASHBOARD
           </Link>
           <Link
             to="/templates"
@@ -172,19 +167,6 @@ class Sidebar extends Component {
             SETTING
           </Link>
         </div>
-        {/* <Route
-          render={({ history }) => (
-            <div
-              className="logout btn"
-              onClick={() => {
-                this.props.context.actions.setLogout();
-                history.push("/");
-              }}
-            >
-              LOGOUT
-            </div>
-          )}
-        /> */}
       </div>
     );
   }

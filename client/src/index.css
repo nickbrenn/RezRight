@@ -1,18 +1,3 @@
-/* the row card variants are for small one line cards */
-/* This card-text syling makes sure words don't jut up against the edge on single line things like skills and such */
-/* This keeps the red delete X from jutting up against the left side on single line row cards */
-/* a:hover {
-  color: inherit !important;
-  text-decoration: none !important;
-} */
-/* .land-btn:hover {
-  font-weight: 500; 
-} */
-/* Stops icons next to section titles on sidebar from jutting up against the titles */
-/* .skills-containment-div .skillgroup {
-  display: flex;
-  padding: 2rem;
-} */
 html {
   font-size: 1.4rem;
 }
