@@ -1,13 +1,3 @@
-# CS9-ResumeMaker
+# RezRight
 
-Front End - https://rezright.netlify.com
-
-Back End - https://labs-resume-maker.herokuapp.com/
-
-Login picture: https://www.pexels.com/
-
-Icons made by Nas Ztudio: www.flaticon.com
-
-Header: https://pixabay.com/en/photos/banner/
-
-Styling: http://mksht.crisnoble.com
+A site that lets you make resumes. Demo link: https://rezright.netlify.com
