@@ -1,11 +1,11 @@
 {
-  "name": "CS9-ResumeMaker",
-  "version": "1.0.0",
+  "name": "RezRight",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lambda-School-Labs/CS9-ResumeMaker.git"
+    "url": "git+https://github.com/nickbrenn/RezRight.git"
   },
   "scripts": {
     "server": "nodemon server.js"
@@ -14,9 +14,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Lambda-School-Labs/CS9-ResumeMaker/issues"
+    "url": "https://github.com/nickbrenn/RezRight/issues"
   },
-  "homepage": "https://github.com/Lambda-School-Labs/CS9-ResumeMaker#readme",
+  "homepage": "https://github.com/nickbrenn/RezRight#readme",
   "dependencies": {
     "base64url": "^3.0.0",
     "bcrypt": "^3.0.0",
